@@ -96,7 +96,6 @@ Recommended test credentials after you insert the user above:
 -     Email:       ketharan19@gmail.com
 -     Password:   123456
 
-Option B — create the user from a small Node script that connects to your MySQL instance and inserts the hashed password.
 
 ## Database setup
 
