@@ -1,4 +1,5 @@
 const API_BASE_URL = "http://localhost:5000/api/leads";
+const LEAD_NOTES_API_BASE_URL = "http://localhost:5000/api/lead-notes";
 
 const getAuthToken = () => localStorage.getItem("token");
 
@@ -109,24 +110,22 @@ export const deleteLead = async (id) => {
 };
 
 export const fetchLeadNotes = async (leadId) => {
-  const data = await requestJson(`http://localhost:5000/api/lead-notes/${leadId}`, {
-    headers: buildHeaders(),
-  });
+	const data = await requestJson(`${LEAD_NOTES_API_BASE_URL}/${leadId}`, {
+		headers: buildHeaders(),
+	});
 
-  return Array.isArray(data) ? data : [];
+	return Array.isArray(data) ? data : [];
 };
 
 export const createLeadNote = async (leadId, noteContent) => {
-  const data = await requestJson("http://localhost:5000/api/lead-notes", {
-    method: "POST",
-    headers: buildHeaders(true),
-    body: JSON.stringify({
-      lead_id: leadId,
-      user_id: null,
-      note_content: noteContent,
-    }),
-  });
-
-  return data;
+	return requestJson(LEAD_NOTES_API_BASE_URL, {
+		method: "POST",
+		headers: buildHeaders(true),
+		body: JSON.stringify({
+			lead_id: leadId,
+			user_id: null,
+			note_content: noteContent,
+		}),
+	});
 };
 

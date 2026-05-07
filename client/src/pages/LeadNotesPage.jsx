@@ -168,16 +168,13 @@ function LeadNotesPage() {
       {error && <div className="alert alert-danger mb-3">{error}</div>}
 
       <div className="row g-4">
-        {/* Left Panel */}
         <div className="col-lg-4">
           <div className="card border-0 shadow-sm rounded-4 h-100">
             <div className="card-header bg-body border-bottom rounded-top-4 p-4">
               <div className="d-flex justify-content-between align-items-center mb-3">
                 <div>
                   <h5 className="mb-1 fw-bold">Lead Notes</h5>
-                  <small className="text-body-secondary">
-                    Manage notes lead by lead
-                  </small>
+                  <small className="text-body-secondary">Manage notes lead by lead</small>
                 </div>
                 <span className="badge rounded-pill bg-primary-subtle text-primary px-3 py-2">
                   {filteredLeads.length}
@@ -249,9 +246,7 @@ function LeadNotesPage() {
 
                         <div className="mt-2">
                           <span
-                            className={`badge rounded-pill px-3 py-2 ${getStatusClass(
-                              lead.status
-                            )}`}
+                            className={`badge rounded-pill px-3 py-2 ${getStatusClass(lead.status)}`}
                           >
                             {lead.status}
                           </span>
@@ -265,12 +260,10 @@ function LeadNotesPage() {
           </div>
         </div>
 
-        {/* Right Panel */}
         <div className="col-lg-8">
           <div className="card border-0 shadow-sm rounded-4 h-100">
             {selectedLead ? (
               <>
-                {/* Header */}
                 <div className="card-header bg-body border-bottom rounded-top-4 p-4">
                   <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
                     <div className="d-flex align-items-center gap-3">
@@ -330,105 +323,86 @@ function LeadNotesPage() {
                   </div>
                 </div>
 
-                {/* Body */}
                 <div className="card-body p-4">
-                  {/* Add Note */}
                   <div className="card border-0 bg-body-tertiary rounded-4 mb-4">
                     <div className="card-body p-4">
                       <div className="d-flex justify-content-between align-items-center mb-3">
                         <h5 className="mb-0 fw-semibold">Add New Note</h5>
-                        <span className="text-body-secondary small">
-                          Notes for this lead
-                        </span>
+                        <span className="text-body-secondary small">Select a lead to manage notes</span>
                       </div>
 
                       <textarea
-                        className="form-control rounded-4 border-0 shadow-sm"
+                        className="form-control mb-3 bg-body"
                         rows="4"
                         placeholder="Write your note here..."
                         value={newNote}
                         onChange={(e) => setNewNote(e.target.value)}
-                        disabled={isAddingNote}
-                      ></textarea>
+                      />
 
-                      <div className="mt-3 d-flex justify-content-end">
-                        <button
-                          className="btn btn-primary rounded-pill px-4"
-                          onClick={handleAddNote}
-                          disabled={isAddingNote || !newNote.trim()}
-                        >
-                          {isAddingNote ? (
-                            <>
-                              <span
-                                className="spinner-border spinner-border-sm me-2"
-                                role="status"
-                                aria-hidden="true"
-                              ></span>
-                              Adding...
-                            </>
-                          ) : (
-                            <>
-                              <i className="bi bi-plus-circle me-2"></i>
-                              Add Note
-                            </>
-                          )}
-                        </button>
-                      </div>
+                      <button
+                        type="button"
+                        className="btn btn-primary px-4 rounded-pill"
+                        onClick={handleAddNote}
+                        disabled={isAddingNote || !newNote.trim()}
+                      >
+                        {isAddingNote ? "Saving..." : "Add Note"}
+                      </button>
                     </div>
                   </div>
 
-                  {/* Notes List */}
                   <div className="d-flex justify-content-between align-items-center mb-3">
-                    <div>
-                      <h5 className="mb-1 fw-semibold">Notes History</h5>
-                      <small className="text-body-secondary">All saved notes for this lead</small>
-                    </div>
-                    <span className="badge rounded-pill bg-dark-subtle text-dark px-3 py-2">
-                      {notes.length} Notes
+                    <h5 className="mb-0 fw-semibold">Note History</h5>
+                    <span className="badge rounded-pill bg-secondary-subtle text-secondary">
+                      {notes.length}
                     </span>
                   </div>
 
-                  {notes.length === 0 ? (
-                    <div className="text-center py-5 rounded-4 bg-body-tertiary border">
-                      <i className="bi bi-journal-text fs-1 d-block mb-3 text-body-secondary"></i>
-                      <h6 className="fw-semibold mb-1">No notes yet</h6>
-                      <p className="text-body-secondary mb-0">Add the first note for this lead</p>
-                    </div>
-                  ) : (
-                    <div className="d-flex flex-column gap-3">
-                      {notes.map((note) => (
-                        <div
-                          key={note.id}
-                          className="card border-0 shadow-sm rounded-4 bg-body"
-                        >
-                          <div className="card-body p-4">
+                  <div className="d-grid gap-3">
+                    {notes.length === 0 ? (
+                      <div className="text-center text-body-secondary py-5 border rounded-4 bg-body-tertiary">
+                        <i className="bi bi-journal-text fs-3 d-block mb-2"></i>
+                        No notes yet for this lead.
+                      </div>
+                    ) : (
+                      notes.map((note) => (
+                        <div key={note.id} className="card border-0 shadow-sm rounded-4">
+                          <div className="card-body p-3 p-md-4">
                             <div className="d-flex justify-content-between align-items-start gap-3">
-                              <div className="flex-grow-1">
-                                <div className="d-flex align-items-center gap-2 mb-2">
-                                  <span className="badge bg-primary-subtle text-primary rounded-pill px-3 py-2">
-                                    Note
-                                  </span>
-                                  <small className="text-body-secondary">
-                                    <i className="bi bi-calendar-event me-2"></i>
-                                    {formatDate(note.created_at)}
-                                  </small>
+                              <div className="d-flex gap-3">
+                                <div
+                                  className="rounded-circle d-flex align-items-center justify-content-center text-white fw-semibold"
+                                  style={{
+                                    width: "42px",
+                                    height: "42px",
+                                    background: "linear-gradient(135deg, #2563eb, #60a5fa)",
+                                    flexShrink: 0,
+                                  }}
+                                >
+                                  N
                                 </div>
-
-                                <p className="mb-0" style={{ lineHeight: "1.7" }}>
-                                  {note.note_content}
-                                </p>
+                                <div>
+                                  <div className="fw-semibold mb-1">Note</div>
+                                  <p className="mb-2 text-body-secondary">{note.note_content}</p>
+                                </div>
                               </div>
+                              <span className="text-body-secondary small text-nowrap">
+                                {formatDate(note.created_at)}
+                              </span>
                             </div>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  )}
+                      ))
+                    )}
+                  </div>
                 </div>
               </>
             ) : (
-              <div className="card-body d-flex align-items-center justify-content-center text-body-secondary">
-                Select a lead to view notes
+              <div className="card-body d-flex align-items-center justify-content-center min-vh-50">
+                <div className="text-center text-body-secondary py-5">
+                  <i className="bi bi-person-lines-fill fs-1 d-block mb-3"></i>
+                  <h5 className="fw-semibold mb-2">No lead selected</h5>
+                  <p className="mb-0">Choose a lead from the left panel to view and add notes.</p>
+                </div>
               </div>
             )}
           </div>

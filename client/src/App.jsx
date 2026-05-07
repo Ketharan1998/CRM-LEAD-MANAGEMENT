@@ -4,7 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import LeadsPage from "./pages/LeadsPage";
 import PipelinePage from "./pages/PipelinePage";
-import LeadNotesPage from "./pages/lead_notes";
+import LeadNotesPage from "./pages/LeadNotesPage";
 import DashboardLayout from "./components/layout/DashboardLayout";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 
